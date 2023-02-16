@@ -11,13 +11,13 @@ export default function RegisterPage() {
 
   function registerUser(ev) {
     ev.preventDefault();
-    axios.get("/test");
-    // axios.post("/register", {
-    //   emri,
-    //   mbiemri,
-    //   email,
-    //   password,
-    // });
+
+    axios.post("/register", {
+      emri,
+      mbiemri,
+      email,
+      password,
+    });
   }
 
   return (

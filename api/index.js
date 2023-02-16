@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
+mongoose.set("strictQuery", true);
+app.use(express.json());
 
 app.use(
   cors({
@@ -8,6 +12,9 @@ app.use(
     origin: "http://localhost:5173",
   })
 );
+
+mongoose.connect(process.env.MONGO_URL);
+
 app.get("/test", (req, res) => {
   res.json("test ok");
 });
