@@ -9,15 +9,19 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function registerUser(ev) {
+  async function registerUser(ev) {
     ev.preventDefault();
-
-    axios.post("/register", {
-      emri,
-      mbiemri,
-      email,
-      password,
-    });
+    try {
+      await axios.post("/register", {
+        emri,
+        mbiemri,
+        email,
+        password,
+      });
+      alert("Registrimi u krye me sukses!");
+    } catch (e) {
+      alert("Regjistrimi ka deshtuar. Provoni Perseri");
+    }
   }
 
   return (
