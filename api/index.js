@@ -11,7 +11,7 @@ mongoose.set("strictQuery", true);
 app.use(express.json());
 
 const bcryptSalt = bcrypt.genSaltSync(10);
-const jwtSecret = "asdfjq30y234i5uj34f2349u35234";
+const jwtSecret = "fasefraw4r5r3wq45wdfgw34twdfg";
 
 app.use(
   cors({
@@ -47,21 +47,19 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(password, user.password);
     if (passOk) {
       jwt.sign(
-        { email: user.emri, id: user._id },
+        { email: user.email, id: user._id },
         jwtSecret,
         {},
         (err, token) => {
           if (err) throw err;
-          res.cookie("token", token).json("pass ok");
+          res.cookie("token", token).json("passok");
         }
       );
-      res.cookie("token", "").json("passOk");
-      alert("Jeni kycur me sukses.");
     } else {
-      alert("Fjalekalimi eshte gabim.");
+      res.status(422).json("pass not ok");
     }
   } else {
-    alert("Perdoruesi nuk ekziston.");
+    res.json("not found");
   }
 });
 app.listen(4000);
