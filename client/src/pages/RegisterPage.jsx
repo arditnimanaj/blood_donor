@@ -8,6 +8,7 @@ export default function RegisterPage() {
   const [mbiemri, setMbiemri] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
 
   async function registerUser(ev) {
     ev.preventDefault();
@@ -17,6 +18,7 @@ export default function RegisterPage() {
         mbiemri,
         email,
         password,
+        bloodGroup,
       });
       alert("Registrimi u krye me sukses!");
     } catch (e) {
@@ -53,6 +55,22 @@ export default function RegisterPage() {
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
+          <label>
+            Pick your blood group:
+            <select
+              value={bloodGroup}
+              onChange={(ev) => setBloodGroup(ev.target.value)}
+            >
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="0+">0+</option>
+              <option value="0-">0-</option>
+            </select>
+          </label>
           <button className="primary">Regjistrohuni</button>
           <div className="text-center py-2 text-gray-500">
             Keni llogari?
