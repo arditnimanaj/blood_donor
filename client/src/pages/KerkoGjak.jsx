@@ -7,6 +7,16 @@ export default function KerkoGjak() {
   const changeValue = (event) => {
     setValue(event.target.value);
   };
+
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [date, setDate] = useState("");
+  const [sasia, setSasia] = useState("");
+  const [info, setInfo] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [anonymous, setAnonymous] = useState(false);
+
   return (
     <div>
       {action !== "new" && (
@@ -147,7 +157,9 @@ export default function KerkoGjak() {
               </span>
             </h2>
             <textarea />
-            <h2 className="flex text-xl mt-3 gap-2 items-center">Mosha</h2>
+            <h2 className="flex text-xl mt-3 ml-5 gap-2 items-center">
+              Mosha*
+            </h2>
             <input
               type="number"
               placeholder="Ju lutem shenoni moshen tuaj"
@@ -164,6 +176,9 @@ export default function KerkoGjak() {
                 <option value="other">Tjeter</option>
               </select>
             </label>
+            <div>
+              <button className="primary my-6 ">Ruaj</button>
+            </div>
           </form>
         </div>
       )}

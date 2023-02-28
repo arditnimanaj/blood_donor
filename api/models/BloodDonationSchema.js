@@ -4,11 +4,11 @@ const BloodDonationSchema = new mongoose.Schema({
   kerkuesi: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   phoneNumber: Number,
   address: String,
-  photos: [String],
   data: Number,
   sasia: Number,
   age: Number,
   gender: String,
+  info: String,
 });
 
 const DonationModel = mongoose.model("BloodDonation", BloodDonationSchema);
