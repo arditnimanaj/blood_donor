@@ -5,18 +5,19 @@ const User = require("./models/User.js");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 mongoose.set("strictQuery", true);
 app.use(express.json());
-
+app.use(cookieParser());
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "fasefraw4r5r3wq45wdfgw34twdfg";
 
 app.use(
   cors({
     credentials: true,
-    origin: "http://127.0.0.1:5173",
+    origin: "http://localhost:5173",
   })
 );
 
@@ -26,13 +27,14 @@ app.get("/test", (req, res) => {
   res.json("test ok");
 });
 app.post("/register", async (req, res) => {
-  const { emri, mbiemri, email, password } = req.body;
+  const { emri, mbiemri, email, password, bloodGroup } = req.body;
   try {
     const user = await User.create({
       emri,
       mbiemri,
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
+      bloodGroup,
     });
     res.json(user);
   } catch (e) {
@@ -47,12 +49,17 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(password, user.password);
     if (passOk) {
       jwt.sign(
-        { email: user.email, id: user._id },
+        {
+          email: user.email,
+          id: user._id,
+          emri: user.emri,
+          mbiemri: user.mbiemri,
+        },
         jwtSecret,
         {},
         (err, token) => {
           if (err) throw err;
-          res.cookie("token", token).json("passok");
+          res.cookie("token", token).json(user);
         }
       );
     } else {
@@ -62,4 +69,17 @@ app.post("/login", async (req, res) => {
     res.json("not found");
   }
 });
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      const { emri, mbiemri, email, _id } = await User.findById(userData.id);
+      res.json({ emri, mbiemri, email, _id });
+    });
+  } else {
+    res.json(null);
+  }
+});
+
 app.listen(4000);
