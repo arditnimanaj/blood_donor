@@ -55,11 +55,13 @@ export default function RegisterPage() {
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
-          <label>
+
+          <label className="bloodGroupForm flex justify-center text-red-700">
             Pick your blood group:
             <select
               value={bloodGroup}
               onChange={(ev) => setBloodGroup(ev.target.value)}
+              required
             >
               <option value="AB+">AB+</option>
               <option value="AB-">AB-</option>

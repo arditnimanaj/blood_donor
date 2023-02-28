@@ -13,7 +13,7 @@ export default function Header() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          class="w-10 h-10"
+          className="w-10 h-10"
         >
           <path
             strokeLinecap="round"
@@ -38,7 +38,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="w-5 h-5"
+            className="w-5 h-5"
           >
             <path
               strokeLinecap="round"
@@ -58,7 +58,7 @@ export default function Header() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          class="w-6 h-6"
+          className="w-6 h-6"
         >
           <path
             strokeLinecap="round"
@@ -73,7 +73,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="w-7 h-7"
+            className="w-7 h-7"
           >
             <path
               strokeLinecap="round"
@@ -82,7 +82,12 @@ export default function Header() {
             />
           </svg>
         </div>
-        {!!user && <div>{user.emri + " " + user.mbiemri}</div>}
+        {!!user && (
+          <div>
+            {user.emri + " " + user.mbiemri + "  "}
+            <span className="font-bold text-red-500">{user?.bloodGroup}</span>
+          </div>
+        )}
       </Link>
     </header>
   );
