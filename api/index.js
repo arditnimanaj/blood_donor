@@ -74,8 +74,10 @@ app.get("/profile", (req, res) => {
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      const { emri, mbiemri, email, _id } = await User.findById(userData.id);
-      res.json({ emri, mbiemri, email, _id });
+      const { emri, mbiemri, email, _id, bloodGroup } = await User.findById(
+        userData.id
+      );
+      res.json({ emri, mbiemri, email, _id, bloodGroup });
     });
   } else {
     res.json(null);

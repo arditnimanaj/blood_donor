@@ -5,7 +5,13 @@
 input[type="text"],
 input[type="email"],
 input[type="password"],
-.bloodGroupForm {
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="range"],
+textarea,
+.bloodGroupForm,
+.genderGroupForm {
   @apply w-full border border-primary my-2 py-2 px-3 rounded-2xl;
 }
 
