@@ -11,13 +11,13 @@ export default function KerkoGjakForm() {
     return "text-xl mt-4 flex gap-2 items-center ";
   }
 
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [date, setDate] = useState("");
+  const [createdAt, setCreatedAt] = useState(new Date().toLocaleString());
   const [sasia, setSasia] = useState("");
   const [info, setInfo] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("18");
+  const [gender, setGender] = useState("male");
   const [anonymous, setAnonymous] = useState(false);
 
   const [redirectToDonationList, setRedirectToDonationList] = useState(false);
@@ -26,9 +26,9 @@ export default function KerkoGjakForm() {
     ev.preventDefault();
 
     const { data: responseData } = await axios.post("/donations", {
-      phone,
+      phoneNumber,
       address,
-      date,
+      createdAt,
       sasia,
       info,
       age,
@@ -65,8 +65,8 @@ export default function KerkoGjakForm() {
           type="tel"
           placeholder="Ju lutem shenoni numrin kontaktues..."
           required
-          value={phone}
-          onChange={(ev) => setPhone(ev.target.value)}
+          value={phoneNumber}
+          onChange={(ev) => setPhoneNumber(ev.target.value)}
         />
         <h2 className={headerClassName()}>
           <svg
@@ -110,8 +110,8 @@ export default function KerkoGjakForm() {
         <input
           type="date"
           placeholder="Shenoni daten..."
-          value={date}
-          onChange={(ev) => setDate(ev.target.value)}
+          value={createdAt}
+          onChange={(ev) => setCreatedAt(ev.target.value)}
         />
         <h2 className={headerClassName()}>
           <svg
