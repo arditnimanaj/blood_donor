@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const User = require("./models/User.js");
+const BloodDonation = require("./models/BloodDonation.js");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -86,6 +87,34 @@ app.get("/profile", (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json(true);
+});
+
+app.post("/donations", (req, res) => {
+  const { token } = req.cookies;
+  const { phoneNumber, address, data, sasia, age, gender, info } = req.body;
+
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const donationDoc = await BloodDonation.create({
+      kerkuesi: userData.id,
+      phoneNumber,
+      address,
+      data,
+      sasia,
+      age,
+      gender,
+      info,
+    });
+    res.json(donationDoc);
+  });
+});
+
+app.get("/donations", (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    const { id } = userData;
+    res.json(await BloodDonation.find({ kerkuesi: id }));
+  });
 });
 
 app.listen(4000);

@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
-const { schema } = require("./user");
-const BloodDonationSchema = new mongoose.Schema({
+
+const BloodDonation = new mongoose.Schema({
   kerkuesi: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   phoneNumber: Number,
   address: String,
-  data: Number,
+  date: Date,
   sasia: Number,
   age: Number,
   gender: String,
   info: String,
 });
 
-const DonationModel = mongoose.model("BloodDonation", BloodDonationSchema);
+const DonationModel = mongoose.model("BloodDonation", BloodDonation);
 
 module.exports = DonationModel;
