@@ -91,7 +91,8 @@ app.post("/logout", (req, res) => {
 
 app.post("/donations", (req, res) => {
   const { token } = req.cookies;
-  const { phoneNumber, address, data, sasia, age, gender, info } = req.body;
+  const { phoneNumber, address, createdAt, sasia, age, gender, info } =
+    req.body;
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -99,7 +100,7 @@ app.post("/donations", (req, res) => {
       kerkuesi: userData.id,
       phoneNumber,
       address,
-      data,
+      createdAt,
       sasia,
       age,
       gender,
