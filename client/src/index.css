@@ -12,7 +12,7 @@ input[type="range"],
 textarea,
 .bloodGroupForm,
 .genderGroupForm {
-  @apply w-full border border-primary my-2 py-2 px-3 rounded-2xl;
+  @apply w-full border border-primary my-2 py-2 px-3 rounded-xl;
 }
 
 button {

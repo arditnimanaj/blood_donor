@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const { populate } = require("./models/User.js");
 
 require("dotenv").config();
 mongoose.set("strictQuery", true);
@@ -18,7 +19,7 @@ const jwtSecret = "fasefraw4r5r3wq45wdfgw34twdfg";
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "http://127.0.0.1:5173",
   })
 );
 
@@ -91,11 +92,20 @@ app.post("/logout", (req, res) => {
 
 app.post("/donations", (req, res) => {
   const { token } = req.cookies;
-  const { phoneNumber, address, createdAt, sasia, age, gender, info } =
-    req.body;
+  const {
+    phoneNumber,
+    address,
+    createdAt,
+    sasia,
+    age,
+    gender,
+    info,
+    isAnonymous,
+  } = req.body;
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
+
     const donationDoc = await BloodDonation.create({
       kerkuesi: userData.id,
       phoneNumber,
@@ -105,6 +115,7 @@ app.post("/donations", (req, res) => {
       age,
       gender,
       info,
+      isAnonymous,
     });
     res.json(donationDoc);
   });
@@ -114,8 +125,14 @@ app.get("/donations", (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     const { id } = userData;
-    res.json(await BloodDonation.find({ kerkuesi: id }));
+    res.json(await BloodDonation.find({ kerkuesi: id }).populate("kerkuesi"));
   });
 });
+
+//test purposes only
+// app.get("/alldonations", async (req, res) => {
+//   const { token } = req.cookies;
+//   res.json(await BloodDonation.find({}));
+// });
 
 app.listen(4000);

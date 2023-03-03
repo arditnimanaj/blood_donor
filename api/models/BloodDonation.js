@@ -9,6 +9,7 @@ const BloodDonation = new mongoose.Schema({
   age: Number,
   gender: String,
   info: String,
+  isAnonymous: Boolean,
 });
 
 const DonationModel = mongoose.model("BloodDonation", BloodDonation);

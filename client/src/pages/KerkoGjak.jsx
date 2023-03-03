@@ -12,6 +12,12 @@ export default function KerkoGjak() {
       setDonations(data);
     });
   }, []);
+  // const [allDonations, setAllDonations] = useState([]);
+  // useEffect(() => {
+  //   axios.get("/alldonations").then(({ data }) => {
+  //     setAllDonations(data);
+  //   });
+  // }, []);
 
   return (
     <div>
@@ -44,6 +50,16 @@ export default function KerkoGjak() {
               donations.map((donation) => (
                 <div key={donation._id}>{donation.address}</div>
               ))}
+          </div>
+          <div>
+            <h1>ALl</h1>
+
+            {/* {allDonations.length > 0 &&
+              allDonations.map((donation) => (
+                <div key={donation._id}>
+                  {donation.address + " ----- " + donation.kerkuesiName}
+                </div>
+              ))} */}
           </div>
         </div>
       )}

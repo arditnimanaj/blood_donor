@@ -18,7 +18,7 @@ export default function KerkoGjakForm() {
   const [info, setInfo] = useState("");
   const [age, setAge] = useState("18");
   const [gender, setGender] = useState("male");
-  const [anonymous, setAnonymous] = useState(false);
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   const [redirectToDonationList, setRedirectToDonationList] = useState(false);
 
@@ -33,6 +33,7 @@ export default function KerkoGjakForm() {
       info,
       age,
       gender,
+      isAnonymous,
     });
     setRedirectToDonationList(true);
   }
@@ -167,9 +168,8 @@ export default function KerkoGjakForm() {
           value={age}
           onChange={(ev) => setAge(ev.target.value)}
         />
-
+        <h2 className={headerClassName()}>Gjinia:</h2>
         <label className="genderGroupForm flex text-center  justify-right text-black-700 mt-3 ">
-          Gjinia:
           <select
             required
             value={gender}
@@ -180,6 +180,20 @@ export default function KerkoGjakForm() {
             <option value="other">Tjeter</option>
           </select>
         </label>
+        <div className="flex flex-col text-center bg-red-300 rounded-full my-4 py-3 px-4 max-w-full ">
+          <input
+            class="w-5 h-5 flex mx-auto bg-red-500 rounded-full enabled:hover:bg-red-500 checked:bg-red-500"
+            type="checkbox"
+            value={isAnonymous}
+            onChange={(ev) => setIsAnonymous(ev.target.checked)}
+          />
+
+          <h1 className="font-bold text-xl">Anonim?</h1>
+          <span>
+            Me te qenurit anonim kuptojme qe dhuruesi i gjakut do shohe vetem te
+            dhenat kontaktuese.
+          </span>
+        </div>
         <div>
           <button className="primary my-6 ">Ruaj</button>
         </div>
