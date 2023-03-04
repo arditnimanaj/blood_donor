@@ -1,10 +1,18 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { Outlet, useParams } from "react-router-dom";
 import Header from "./Header";
+import { UserContext } from "./UserContext";
 
 export default function Layout() {
+  const { user } = useContext(UserContext);
+  function divClassName() {
+    if (!user) {
+      return " flex flex-col min-h-screen bg-contain";
+    }
+  }
+
   return (
-    <div className=" flex flex-col min-h-screen">
+    <div className={divClassName()}>
       <Header />
       <Outlet />
     </div>

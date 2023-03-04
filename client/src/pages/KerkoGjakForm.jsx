@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import AccountNav from "./AccountNav";
 export default function KerkoGjakForm() {
   const [value, setValue] = useState(0);
   const changeValue = (event) => {
@@ -44,6 +45,14 @@ export default function KerkoGjakForm() {
 
   return (
     <>
+      <AccountNav />
+      <div className="text-center font-bold text-white bg-gray-400 border max-w-xl mx-auto rounded-full px-5 py-5 hover:bg-red-400">
+        <h1>Ju lutem jeni korrekt gjate mbushjes se formes !</h1>
+        <h1>Fushat me yllin (*) jane te detyruara</h1>
+        <h1>
+          Grupi i juaj i gjakut miret automatikisht nga te dhenat e regjistrimit
+        </h1>
+      </div>
       <form className="max-w-lg mx-auto" onSubmit={addnewDonation}>
         <h2 className={headerClassName()}>
           <svg

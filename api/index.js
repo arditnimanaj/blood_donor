@@ -124,6 +124,7 @@ app.post("/donations", (req, res) => {
 app.get("/donations", (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
     const { id } = userData;
     res.json(await BloodDonation.find({ kerkuesi: id }).populate("kerkuesi"));
   });

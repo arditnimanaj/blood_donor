@@ -5,7 +5,10 @@ import "./App.css";
 import Layout from "./Layout";
 import AccountPage from "./pages/AccountPage";
 import IndexPage from "./pages/IndexPage";
+import KerkoGjak from "./pages/KerkoGjak";
+import KerkoGjakForm from "./pages/KerkoGjakForm";
 import LoginPage from "./pages/LoginPage";
+import NonLoggedIn from "./pages/NonLoggedIn";
 import RegisterPage from "./pages/RegisterPage";
 import { UserContext, UserContextProvider } from "./UserContext";
 
@@ -23,6 +26,7 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
           <Route path="/account/:subpage?" element={<AccountPage />} />
           <Route path="/account/:subpage/:action" element={<AccountPage />} />
+          <Route path="/account/kerkogjak/:id" element={<KerkoGjakForm />} />
         </Route>
       </Routes>
     </UserContextProvider>

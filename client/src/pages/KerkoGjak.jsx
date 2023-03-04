@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import KerkoGjakForm from "./KerkoGjakForm";
 import axios from "axios";
-
+import heartSvg from "../assets/blood-bank.svg";
+import { format } from "date-fns";
 export default function KerkoGjak() {
   const { action } = useParams();
   const [donations, setDonations] = useState([]);
@@ -45,34 +46,62 @@ export default function KerkoGjak() {
               Kerko doza te reja te gjakut
             </Link>
           </div>
-          <div>
+          <div className="mt-4">
             {donations.length > 0 &&
               donations.map((donation) => (
-                <div key={donation._id}>{donation.address}</div>
-              ))}
-          </div>
-          <div>
-            <h1>ALl</h1>
-
-            {/* {allDonations.length > 0 &&
-              allDonations.map((donation) => (
-                <div key={donation._id}>
-                  {donation.address + " ----- " + donation.kerkuesiName}
+                <div
+                  key={donation._id}
+                  className="bg-red-100 p-3 rounded-2xl flex gap-5 my-5 mx-5 items-center"
+                >
+                  <div className="w-32 h-32 bg-red-100">
+                    <img src={heartSvg} />
+                  </div>
+                  <div className="p-2 flex-col">
+                    <h2 className="text-xl text-red-800 font-bold">
+                      {donation.kerkuesi.emri +
+                        " " +
+                        donation.kerkuesi.mbiemri +
+                        " (" +
+                        donation.gender.charAt(0).toUpperCase() +
+                        "-" +
+                        donation.age +
+                        ") "}
+                    </h2>
+                    <p className="">
+                      {format(new Date(donation.createdAt), "dd MMMM yyyy")}
+                    </p>
+                    <p className="text-3xl font-bold text-red-800">
+                      {donation.kerkuesi.bloodGroup}
+                    </p>
+                    {/* <p className="">{donation.info}</p> */}
+                    <p className="">{donation.address}</p>
+                  </div>
+                  <Link
+                    className=" mr-3 ml-auto"
+                    to={"/account/kerkogjak/" + donation._id}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-9 h-9"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                      />
+                    </svg>
+                  </Link>
                 </div>
-              ))} */}
+              ))}
           </div>
         </div>
       )}
       {action === "new" && (
         <div>
-          <div className="text-center font-bold text-white bg-gray-400 border max-w-xl mx-auto rounded-full px-5 py-5 hover:bg-red-400">
-            <h1>Ju lutem jeni korrekt gjate mbushjes se formes !</h1>
-            <h1>Fushat me yllin (*) jane te detyruara</h1>
-            <h1>
-              Grupi i juaj i gjakut miret automatikisht nga te dhenat e
-              regjistrimit
-            </h1>
-          </div>
           <KerkoGjakForm />
         </div>
       )}
