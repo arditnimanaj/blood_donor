@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import AccountNav from "./AccountNav";
 export default function KerkoGjakForm() {
-  const [value, setValue] = useState(0);
-  const changeValue = (event) => {
-    setValue(event.target.value);
-  };
   function headerClassName() {
     return "text-xl mt-4 flex gap-2 items-center ";
   }
 
+  //FORM VALUES TO IMPORT TO DB
+  const { id } = useParams();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date().toLocaleString());
@@ -20,13 +18,30 @@ export default function KerkoGjakForm() {
   const [age, setAge] = useState("18");
   const [gender, setGender] = useState("male");
   const [isAnonymous, setIsAnonymous] = useState(false);
-
   const [redirectToDonationList, setRedirectToDonationList] = useState(false);
+
+  // UPDATING LISTINGS' PARAMETERS
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get("/donations/" + id).then((response) => {
+      const { data } = response;
+      setPhoneNumber(data.phoneNumber);
+      setAddress(data.address);
+      setCreatedAt(data.createdAt);
+      setSasia(data.sasia);
+      setInfo(data.info);
+      setAge(data.age);
+      setGender(data.gender);
+      setIsAnonymous(data.isAnonymous);
+    });
+  }, [id]);
 
   async function addnewDonation(ev) {
     ev.preventDefault();
-
-    const { data: responseData } = await axios.post("/donations", {
+    const donationData = {
       phoneNumber,
       address,
       createdAt,
@@ -35,8 +50,20 @@ export default function KerkoGjakForm() {
       age,
       gender,
       isAnonymous,
-    });
-    setRedirectToDonationList(true);
+    };
+
+    if (id != "new") {
+      //update
+      await axios.put("/donations", {
+        id,
+        ...donationData,
+      });
+      setRedirectToDonationList(true);
+    } else {
+      ///new donation
+      await axios.post("/donations", donationData);
+      setRedirectToDonationList(true);
+    }
   }
 
   if (redirectToDonationList) {
@@ -133,7 +160,7 @@ export default function KerkoGjakForm() {
             <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
           </svg>
           Sasia e gjakut* (në ml){" "}
-          <span className="font-bold text-primary">{value}</span>
+          <span className="font-bold text-primary"></span>
         </h2>
         <input
           type="range"

@@ -9,7 +9,7 @@ export default function KerkoGjak() {
   const { action } = useParams();
   const [donations, setDonations] = useState([]);
   useEffect(() => {
-    axios.get("/donations").then(({ data }) => {
+    axios.get("/userDonations").then(({ data }) => {
       setDonations(data);
     });
   }, []);

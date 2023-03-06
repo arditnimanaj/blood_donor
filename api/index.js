@@ -121,7 +121,7 @@ app.post("/donations", (req, res) => {
   });
 });
 
-app.get("/donations", (req, res) => {
+app.get("/userDonations", (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -130,6 +130,45 @@ app.get("/donations", (req, res) => {
   });
 });
 
+app.get("/donations/:id", async (req, res) => {
+  const { id } = req.params;
+
+  res.json(await BloodDonation.findById(id));
+});
+
+app.put("/donations", async (req, res) => {
+  const { token } = req.cookies;
+  const {
+    id,
+    phoneNumber,
+    address,
+    createdAt,
+    sasia,
+    age,
+    gender,
+    info,
+    isAnonymous,
+  } = req.body;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    const donationDoc = await BloodDonation.findById(id);
+
+    if (userData.id === donationDoc.kerkuesi.toString()) {
+      donationDoc.set({
+        phoneNumber,
+        address,
+        createdAt,
+        sasia,
+        age,
+        gender,
+        info,
+        isAnonymous,
+      });
+      await donationDoc.save();
+      res.json("ok");
+    }
+  });
+});
 //test purposes only
 // app.get("/alldonations", async (req, res) => {
 //   const { token } = req.cookies;
