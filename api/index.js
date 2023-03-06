@@ -71,6 +71,7 @@ app.post("/login", async (req, res) => {
     res.json("not found");
   }
 });
+
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
   if (token) {
@@ -132,7 +133,6 @@ app.get("/userDonations", (req, res) => {
 
 app.get("/donations/:id", async (req, res) => {
   const { id } = req.params;
-
   res.json(await BloodDonation.findById(id));
 });
 
@@ -169,6 +169,16 @@ app.put("/donations", async (req, res) => {
     }
   });
 });
+
+app.post("/deleteDonation", async (req, res) => {
+  const { donationID } = req.body;
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+    await BloodDonation.findByIdAndDelete(donationID);
+  });
+});
+
 //test purposes only
 // app.get("/alldonations", async (req, res) => {
 //   const { token } = req.cookies;

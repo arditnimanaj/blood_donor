@@ -7,7 +7,7 @@ export default function Layout() {
   const { user } = useContext(UserContext);
   function divClassName() {
     if (!user) {
-      return " flex flex-col min-h-screen bg-contain";
+      return " flex flex-col min-h-screen bg-blood bg-contain";
     }
   }
 
