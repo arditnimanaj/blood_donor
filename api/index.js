@@ -179,6 +179,21 @@ app.post("/deleteDonation", async (req, res) => {
   });
 });
 
+app.get("/allDonations", async (req, res) => {
+  res.json(await BloodDonation.find({}).populate("kerkuesi"));
+});
+// app.get("/matchedDonations", (req, res) => {
+//   const { token } = req.cookies;
+//   if (token) {
+//     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+//       if (err) throw err;
+//       const { bloodGroup } = await User.findById(userData.id);
+//     });
+//   } else {
+//     res.json(null);
+//   }
+// });
+
 //test purposes only
 // app.get("/alldonations", async (req, res) => {
 //   const { token } = req.cookies;

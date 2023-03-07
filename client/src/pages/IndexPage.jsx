@@ -4,6 +4,7 @@ import Header from "../Header";
 import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import NonLoggedIn from "./NonLoggedIn";
+import Homepage from "./Homepage";
 
 export default function IndexPage() {
   const { user } = useContext(UserContext);
@@ -14,7 +15,11 @@ export default function IndexPage() {
           <NonLoggedIn />
         </div>
       )}
-      {user && <div>Jeni i loguar</div>}
+      {user && (
+        <div>
+          <Homepage />
+        </div>
+      )}
     </div>
   );
 }
