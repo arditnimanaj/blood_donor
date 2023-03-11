@@ -56,6 +56,7 @@ app.post("/login", async (req, res) => {
           id: user._id,
           emri: user.emri,
           mbiemri: user.mbiemri,
+          bloodGroup: user.bloodGroup,
         },
         jwtSecret,
         {},
@@ -106,9 +107,9 @@ app.post("/donations", (req, res) => {
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
-
     const donationDoc = await BloodDonation.create({
       kerkuesi: userData.id,
+      kerkuesiGroup: userData.bloodGroup,
       phoneNumber,
       address,
       createdAt,
@@ -118,6 +119,7 @@ app.post("/donations", (req, res) => {
       info,
       isAnonymous,
     });
+    console.log(donationDoc);
     res.json(donationDoc);
   });
 });
@@ -179,9 +181,42 @@ app.post("/deleteDonation", async (req, res) => {
   });
 });
 
-app.get("/allDonations", async (req, res) => {
-  res.json(await BloodDonation.find({}).populate("kerkuesi"));
+//FIX THE REGEX TO SHOW ONLY A+ (+ is mixing this)
+function returnMatchedBloodGroup(userBloodGroup) {
+  if (userBloodGroup == "A+") {
+    return [/A[+]/, /AB[+]/];
+  } else if ((userBloodGroup = "0+")) {
+    return [/0[+]/, /A[+]/, /B[+]/, /AB[+]/];
+  } else if (userBloodGroup == "B+") {
+    return [/B[+]/, /AB[+]/];
+  } else if (userBloodGroup == "AB+") {
+    return [/AB[+]/];
+  } else if (userBloodGroup == "A-") {
+    return [/A[+]/, /A[-]/, /AB[+]/, /AB[-]/];
+  } else if (userBloodGroup == "0-") {
+    return [/.*/]; //gives blood to everyone
+  } else if ((userBloodGroup = "B-")) {
+    return [/B[+]/, /B[-]/, /AB[+]/, /AB[-]/];
+  } else if (userBloodGroup == "AB-") {
+    return [/AB[+]/, /AB[-]/];
+  } else return "error";
+}
+
+app.get("/matchedDonations", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+
+    res.json(
+      await BloodDonation.find({
+        kerkuesiGroup: {
+          $in: returnMatchedBloodGroup(userData.bloodGroup),
+        },
+      }).populate("kerkuesi")
+    );
+  });
 });
+
 // app.get("/matchedDonations", (req, res) => {
 //   const { token } = req.cookies;
 //   if (token) {

@@ -189,7 +189,7 @@ export default function KerkoGjakForm() {
             />
           </svg>
           Informacione shtesë
-          <span className="text-xs text-gray-900">
+          <span className="text-xs items-center text-gray-900">
             (shkruani informacione shtese, nese keni)
           </span>
         </h2>

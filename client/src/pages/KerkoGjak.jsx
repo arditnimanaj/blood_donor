@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DeleteModal from "./DeleteModal";
+import Alert from "react-bootstrap/Alert";
 
 export default function KerkoGjak() {
   const { action } = useParams();
@@ -87,7 +88,7 @@ export default function KerkoGjak() {
                       {format(new Date(donation.createdAt), "dd MMMM yyyy")}
                     </p>
                     <p className="text-3xl font-bold text-red-800">
-                      {donation.kerkuesi.bloodGroup}
+                      {donation.kerkuesiGroup}
                     </p>
                     {/* <p className="">{donation.info}</p> */}
                     <p className="">{donation.address}</p>
