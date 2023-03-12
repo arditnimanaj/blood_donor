@@ -183,23 +183,24 @@ app.post("/deleteDonation", async (req, res) => {
 
 //FIX THE REGEX TO SHOW ONLY A+ (+ is mixing this)
 function returnMatchedBloodGroup(userBloodGroup) {
-  if (userBloodGroup == "A+") {
-    return [/A[+]/, /AB[+]/];
-  } else if ((userBloodGroup = "0+")) {
-    return [/0[+]/, /A[+]/, /B[+]/, /AB[+]/];
-  } else if (userBloodGroup == "B+") {
-    return [/B[+]/, /AB[+]/];
-  } else if (userBloodGroup == "AB+") {
-    return [/AB[+]/];
-  } else if (userBloodGroup == "A-") {
-    return [/A[+]/, /A[-]/, /AB[+]/, /AB[-]/];
-  } else if (userBloodGroup == "0-") {
-    return [/.*/]; //gives blood to everyone
-  } else if ((userBloodGroup = "B-")) {
-    return [/B[+]/, /B[-]/, /AB[+]/, /AB[-]/];
-  } else if (userBloodGroup == "AB-") {
-    return [/AB[+]/, /AB[-]/];
-  } else return "error";
+  if (userBloodGroup === "A+") {
+    return ["A+", "AB+"];
+  } else if (userBloodGroup === "0+") {
+    return ["0+", "A+", "B+", "AB+"];
+  } else if (userBloodGroup === "B+") {
+    return ["B+", "AB+"];
+  } else if (userBloodGroup === "AB+") {
+    return ["AB+"];
+  } else if (userBloodGroup === "A-") {
+    return ["A+", "A-", "AB+", "AB-"];
+  } else if (userBloodGroup === "0-") {
+    return ["0+", "0-", "A-", "A+", "B+", "B-", "AB+", "AB-"];
+    //gives blood to everyone
+  } else if (userBloodGroup === "B-") {
+    return ["B+", "B-", "AB+", "AB-"];
+  } else if (userBloodGroup === "AB-") {
+    return ["AB+", "AB-"];
+  } else console.log("Blood Group wrong input.");
 }
 
 app.get("/matchedDonations", async (req, res) => {
