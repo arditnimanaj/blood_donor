@@ -4,7 +4,7 @@ import { Link, Navigate, redirect, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import KerkoGjak from "./KerkoGjak";
-import AccountNav from "./AccountNav";
+import AccountNav from "./components/AccountNav";
 
 export default function AccountPage() {
   let { subpage } = useParams();

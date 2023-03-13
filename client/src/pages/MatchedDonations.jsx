@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import heartSvg from "../assets/blood-bank.svg";
 import { format } from "date-fns";
-import { Alert } from "bootstrap";
+import MatchedInfo from "./components/matchedInfo";
 
 export default function Homepage() {
   const [matchedDonations, setMatchedDonations] = useState([]);
@@ -12,15 +12,8 @@ export default function Homepage() {
     });
   }, []);
   return (
-    <>
-      <div className="flex-col rounded-xl bg-yellow-100 my-4">
-        <h1>KUJDES !</h1>
-        <span>
-          Ne kete modul do shfaqen vetem ata persona qe ju mund t'i dhuroni
-          gjak. Pra gjaku juaj eshte kompatibil per grupin e tyre te gjakut. Per
-          te shikuar te gjithe personat qe po kerkojne gjak
-        </span>
-      </div>
+    <div>
+      <MatchedInfo />
       <div className="mt-4 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-5">
         {matchedDonations.length > 0 &&
           matchedDonations.map((donation) => (
@@ -52,6 +45,6 @@ export default function Homepage() {
             </div>
           ))}
       </div>
-    </>
+    </div>
   );
 }

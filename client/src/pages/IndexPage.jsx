@@ -4,7 +4,7 @@ import Header from "../Header";
 import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import NonLoggedIn from "./NonLoggedIn";
-import Homepage from "./Homepage";
+import MatchedDonations from "./MatchedDonations";
 
 export default function IndexPage() {
   const { user } = useContext(UserContext);
@@ -17,7 +17,7 @@ export default function IndexPage() {
       )}
       {user && (
         <div>
-          <Homepage />
+          <MatchedDonations />
         </div>
       )}
     </div>

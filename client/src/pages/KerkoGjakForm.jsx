@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
-import AccountNav from "./AccountNav";
+import AccountNav from "./components/AccountNav";
 export default function KerkoGjakForm() {
   function headerClassName() {
     return "text-xl mt-4 flex gap-2 items-center ";
