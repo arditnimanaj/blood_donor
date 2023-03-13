@@ -7,6 +7,7 @@ import AccountPage from "./pages/AccountPage";
 import DonationPage from "./pages/DonationPage";
 import IndexPage from "./pages/IndexPage";
 import KerkoGjak from "./pages/KerkoGjak";
+import AllDonations from "./pages/AllDonations";
 import KerkoGjakForm from "./pages/KerkoGjakForm";
 import LoginPage from "./pages/LoginPage";
 import NonLoggedIn from "./pages/NonLoggedIn";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/account/:subpage/:action" element={<AccountPage />} />
           <Route path="/account/kerkogjak/:id" element={<KerkoGjakForm />} />
           <Route path="/donations/:id" element={<DonationPage />} />
+          <Route path="/alldonations" element={<AllDonations />} />
         </Route>
       </Routes>
     </UserContextProvider>

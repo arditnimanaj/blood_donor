@@ -7,6 +7,8 @@ import { Helmet } from "react-helmet";
 export default function DonationPage() {
   const { id } = useParams();
   const [donation, setDonation] = useState(null);
+  const { subpage } = useParams;
+  console.log(subpage);
   useEffect(() => {
     if (!id) {
       return;
@@ -32,7 +34,6 @@ export default function DonationPage() {
       <Helmet>
         <body className=" bg-donation "></body>
       </Helmet>
-
       <div className="mt-4 px-8 py-4">
         <div className="flex gap-4">
           <Link to={"/"}>
