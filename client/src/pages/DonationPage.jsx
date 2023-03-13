@@ -7,8 +7,7 @@ import { Helmet } from "react-helmet";
 export default function DonationPage() {
   const { id } = useParams();
   const [donation, setDonation] = useState(null);
-  const { subpage } = useParams;
-  console.log(subpage);
+  const { subpage } = useParams();
   useEffect(() => {
     if (!id) {
       return;

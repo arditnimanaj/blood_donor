@@ -6,8 +6,9 @@ import MatchedInfo from "./components/matchedInfo";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-export default function Homepage() {
+export default function MatchedDonations() {
   const [matchedDonations, setMatchedDonations] = useState([]);
+
   useEffect(() => {
     axios.get("/matchedDonations").then((response) => {
       setMatchedDonations(response.data);

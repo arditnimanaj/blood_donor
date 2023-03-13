@@ -10,8 +10,6 @@ export default function Layout() {
       return " flex flex-col min-h-screen bg-login bg-contain";
     }
   }
-  const { element } = useParams();
-  console.log(element);
   return (
     <div className={divClassName()}>
       <Header />
