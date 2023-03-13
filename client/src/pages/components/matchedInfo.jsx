@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MatchedInfo() {
   return (
-    <div className="flex-col rounded-xl bg-yellow-100 my-8 text-center p-5 max-w-3xl mx-auto">
+    <div className="matched-info">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DeleteModal from "./DeleteModal";
 import Alert from "react-bootstrap/Alert";
+import { Helmet } from "react-helmet";
 
 export default function KerkoGjak() {
   const { action } = useParams();
@@ -39,6 +40,9 @@ export default function KerkoGjak() {
 
   return (
     <div>
+      <Helmet>
+        <body className="bg-donation"></body>
+      </Helmet>
       {action !== "new" && (
         <div>
           <div className="text-center">

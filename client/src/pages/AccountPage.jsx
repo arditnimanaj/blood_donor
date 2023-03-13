@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import KerkoGjak from "./KerkoGjak";
 import AccountNav from "./components/AccountNav";
+import { Helmet } from "react-helmet";
 
 export default function AccountPage() {
   let { subpage } = useParams();
@@ -34,6 +35,10 @@ export default function AccountPage() {
   return (
     <div>
       <AccountNav />
+      <Helmet>
+        <title>My profile</title>
+        <body className="bg-donation"></body>
+      </Helmet>
       {subpage === "profile" && (
         <div className="text-center max-w-lg mx-auto">
           Jeni te kycur si {user.emri + " " + user.mbiemri} ({user.email})

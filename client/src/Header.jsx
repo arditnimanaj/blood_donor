@@ -5,7 +5,7 @@ import { useContext } from "react";
 export default function Header() {
   const { user } = useContext(UserContext);
   return (
-    <header className="p-6 flex justify-between bg-red-500 w-510">
+    <header className="header-nav">
       <Link to={"/"} className="flex items-center gap-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"

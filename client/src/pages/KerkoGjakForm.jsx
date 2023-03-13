@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import AccountNav from "./components/AccountNav";
+import { Helmet } from "react-helmet";
 export default function KerkoGjakForm() {
   function headerClassName() {
     return "text-xl mt-4 flex gap-2 items-center ";
@@ -13,7 +14,7 @@ export default function KerkoGjakForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date().toLocaleString());
-  const [sasia, setSasia] = useState("");
+  const [sasia, setSasia] = useState("250");
   const [info, setInfo] = useState("");
   const [age, setAge] = useState("18");
   const [gender, setGender] = useState("male");
@@ -73,6 +74,10 @@ export default function KerkoGjakForm() {
   return (
     <>
       <AccountNav />
+      <Helmet>
+        <title>New Donation</title>
+        <body className="bg-donation"></body>
+      </Helmet>
       <div className="text-center font-bold text-white bg-gray-400 border max-w-xl mx-auto rounded-full px-5 py-5 hover:bg-red-400">
         <h1>Ju lutem jeni korrekt gjate mbushjes se formes !</h1>
         <h1>Fushat me yllin (*) jane te detyruara</h1>
@@ -167,8 +172,8 @@ export default function KerkoGjakForm() {
           class="range pr-6 accent-red-500"
           placeholder="Shenoni daten..."
           min="0"
-          step="10"
-          max="500"
+          step="50"
+          max="1000"
           value={sasia}
           onChange={(ev) => setSasia(ev.target.value)}
           required
