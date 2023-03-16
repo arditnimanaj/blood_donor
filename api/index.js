@@ -25,10 +25,10 @@ app.use(
 
 mongoose.connect(process.env.MONGO_URL);
 
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
   res.json("test ok");
 });
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { emri, mbiemri, email, password, bloodGroup } = req.body;
   try {
     const user = await User.create({
@@ -44,7 +44,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
@@ -73,7 +73,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
+app.get("/api/profile", (req, res) => {
   const { token } = req.cookies;
   if (token) {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -88,11 +88,11 @@ app.get("/profile", (req, res) => {
   }
 });
 
-app.post("/logout", (req, res) => {
+app.post("/api/logout", (req, res) => {
   res.cookie("token", "").json(true);
 });
 
-app.post("/donations", (req, res) => {
+app.post("/api/donations", (req, res) => {
   const { token } = req.cookies;
   const {
     phoneNumber,
@@ -124,7 +124,7 @@ app.post("/donations", (req, res) => {
   });
 });
 
-app.get("/userDonations", (req, res) => {
+app.get("/api/userDonations", (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -133,13 +133,13 @@ app.get("/userDonations", (req, res) => {
   });
 });
 
-app.get("/donations/:id", async (req, res) => {
+app.get("/api/donations/:id", async (req, res) => {
   const { id } = req.params;
 
   res.json(await BloodDonation.findById(id).populate("kerkuesi"));
 });
 
-app.put("/donations", async (req, res) => {
+app.put("/api/donations", async (req, res) => {
   const { token } = req.cookies;
   const {
     id,
@@ -173,7 +173,7 @@ app.put("/donations", async (req, res) => {
   });
 });
 
-app.post("/deleteDonation", async (req, res) => {
+app.post("/api/deleteDonation", async (req, res) => {
   const { donationID } = req.body;
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -204,7 +204,7 @@ function returnMatchedBloodGroup(userBloodGroup) {
   } else console.log("Blood Group wrong input.");
 }
 
-app.get("/matchedDonations", async (req, res) => {
+app.get("/api/matchedDonations", async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -220,7 +220,7 @@ app.get("/matchedDonations", async (req, res) => {
 });
 
 //test purposes only
-app.get("/allDonations", async (req, res) => {
+app.get("/api/allDonations", async (req, res) => {
   res.json(await BloodDonation.find({}).populate("kerkuesi"));
 });
 
