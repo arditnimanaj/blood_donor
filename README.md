@@ -8,6 +8,11 @@ This is an app to help people donate blood. The app is built using the MERN stac
 - A dashboard for donors to track their donations and eligibility  to donate
 - Automatically filters people who you can donate based on your blood group
 - Option to share donation status on social media
+
+##Live Site
+
+The app is hosted on Vercel and can be accessed at https://dhurogjak-shpetojete.vercel.app/ for a live experience.
+
 ## Installation
 
 To run the app locally, you'll need to have Node.js and MongoDB installed on your machine. Then, follow these steps:
