@@ -27,8 +27,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="mt-4 grow flex items-center justify-around">
-      <div className="mb-64">
+    <div className="mt-6 grow flex items-center justify-around">
+      <div className="mb-64 bg-gray-400 rounded-2xl p-5 opacity-90">
         <h1 className="text-4xl text-center mb-6">Regjistrohu </h1>
         <form className="max-w-lg mx-auto" onSubmit={registerUser}>
           <input
@@ -55,11 +55,13 @@ export default function RegisterPage() {
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
-          <label>
+
+          <label className="bloodGroupForm flex justify-center text-red-700 bg-white">
             Pick your blood group:
             <select
               value={bloodGroup}
               onChange={(ev) => setBloodGroup(ev.target.value)}
+              required
             >
               <option value="AB+">AB+</option>
               <option value="AB-">AB-</option>
@@ -72,7 +74,7 @@ export default function RegisterPage() {
             </select>
           </label>
           <button className="primary">Regjistrohuni</button>
-          <div className="text-center py-2 text-gray-500">
+          <div className="text-center py-2 text-white">
             Keni llogari?
             <Link to={"/login"}>Kycuni</Link>
           </div>
