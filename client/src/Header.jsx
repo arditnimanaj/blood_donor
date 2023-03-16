@@ -23,28 +23,39 @@ export default function Header() {
         </svg>
         <span className="text-l text-sky-50 mx">DHURO GJAK SHPETO JETE</span>
       </Link>
-      <div className="font-bold flex border border-white-300 rounded-full py-2 px-4 gap-5 bg-white shadow-md shadow-red-200 -ml-2">
-        <div>Kerko Gjak</div>
-        <div className="border-l border-red-500 "></div>
-        <div>Dhuro gjak</div>
-        <div className="border-l  border-red-500"></div>
-        <div>Shiko te gjithe kerkuesit..</div>
-        <button className="bg-primary text-white p-1 rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-        </button>
+      {/* font-bold flex border border-white-300 rounded-full py-2 px-4 gap-5 bg-white shadow-md shadow-red-200 -ml-2 */}
+      <div className="flex justify-between gap-3 items-center font-serif  ">
+        <div className="bg-white rounded-full py-2 px-4  shadow-md shadow-red-200">
+          <Link to={user ? "/account/kerkogjak" : "/login"}> Kerko Gjak</Link>
+        </div>
+        {/* <div className="border-l border-red-500 "></div> */}
+        <div className="bg-white rounded-full py-2 px-4 shadow-md shadow-red-200">
+          <Link to={user ? "/" : "/login"}> Dhuro gjak</Link>
+        </div>
+        {/* <div className="border-l  border-red-500"></div> */}
+        <div className="bg-white rounded-full py-2 px-4 shadow-md shadow-red-200">
+          <Link to={user ? "/alldonations" : "/login"}>
+            {" "}
+            Shiko te gjithe kerkuesit..{" "}
+          </Link>
+
+          <button className="bg-primary text-white p-1 rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-3 h-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
       <Link
         to={user ? "/account" : "/login"}
