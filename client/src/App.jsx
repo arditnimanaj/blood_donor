@@ -29,8 +29,8 @@ function App() {
           <Route path="/account/:subpage?" element={<AccountPage />} />
           <Route path="/account/:subpage/:action" element={<AccountPage />} />
           <Route path="/account/kerkogjak/:id" element={<KerkoGjakForm />} />
-          <Route path="/donations/:id" element={<DonationPage />} />
           <Route path="/alldonations" element={<AllDonations />} />
+          <Route path="/donations/:id" element={<DonationPage />} />
         </Route>
       </Routes>
     </UserContextProvider>

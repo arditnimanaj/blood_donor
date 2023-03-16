@@ -135,7 +135,8 @@ app.get("/userDonations", (req, res) => {
 
 app.get("/donations/:id", async (req, res) => {
   const { id } = req.params;
-  res.json(await BloodDonation.findById(id));
+
+  res.json(await BloodDonation.findById(id).populate("kerkuesi"));
 });
 
 app.put("/donations", async (req, res) => {
@@ -220,7 +221,7 @@ app.get("/matchedDonations", async (req, res) => {
 
 //test purposes only
 app.get("/allDonations", async (req, res) => {
-  res.json(await BloodDonation.find({}));
+  res.json(await BloodDonation.find({}).populate("kerkuesi"));
 });
 
 app.listen(4000);

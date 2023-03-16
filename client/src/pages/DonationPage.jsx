@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 export default function DonationPage() {
   const { id } = useParams();
   const [donation, setDonation] = useState(null);
-  const { subpage } = useParams();
+
   useEffect(() => {
     if (!id) {
       return;
@@ -35,7 +35,7 @@ export default function DonationPage() {
       </Helmet>
       <div className="mt-4 px-8 py-4">
         <div className="flex gap-4">
-          <Link to={"/"}>
+          <Link to={"/"} onClick={() => window.history.back()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
